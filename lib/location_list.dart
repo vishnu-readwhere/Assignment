@@ -1,12 +1,24 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/location_details.dart';
 import './models/location.dart';
 import './location_details.dart';
 
-class LocationList extends StatelessWidget{
-  final List<Location> locations;
-  LocationList(this.locations);
-  
+class LocationList extends StatefulWidget{
+  @override
+  createState()=>_LocationListState();
+}
+class _LocationListState extends State<LocationList>{
+   List<Location> locations=[];
+ 
+  @override
+  void initState(){
+    super.initState();
+    loadData();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,17 +29,25 @@ class LocationList extends StatelessWidget{
     body: ListView.builder(
       itemCount: this.locations.length,
       itemBuilder: (context,index){
+        final location = this.locations[index];
           return ListTile(
             contentPadding: EdgeInsets.all(10.0),
-            leading: _itemThumbnail(this.locations[index]),
-            title: _itemTitle(this.locations[index]),
-            onTap: () => _navigateToLocateDetails(context,index)
+            leading: _itemThumbnail(location),
+            title: _itemTitle(location),
+            onTap: () => _navigateToLocateDetails(context,location.id)
              
             
           );
       }
     ),
     );
+  }
+  loadData() async{
+    final locations = await Location.fetchAll();
+    setState(() {
+      
+    });
+    this.locations = locations;
   }
   void _navigateToLocateDetails(BuildContext context,int locationId){
      Navigator.push(context, MaterialPageRoute(builder: (context) => LocationDetails(locationId)));
