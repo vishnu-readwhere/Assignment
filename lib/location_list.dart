@@ -1,4 +1,4 @@
-import 'dart:html';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/location_details.dart';
@@ -15,7 +15,7 @@ class _LocationListState extends State<LocationList>{
   @override
   void initState(){
     super.initState();
-    loadData();
+    loadData();  
   }
 
 
