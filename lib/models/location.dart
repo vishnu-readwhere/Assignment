@@ -13,7 +13,7 @@ class Location{
   int id;
    String name;
    String url;
-   List<LocationFact> facts;
+   List<dynamic> facts;
   Location({required this.id,required this.name,required this.url,required this.facts});
 
 
